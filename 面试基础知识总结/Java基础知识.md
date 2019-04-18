@@ -6,7 +6,7 @@ https://blog.csdn.net/hope900/article/details/78647466
 
 ## 1.多线程
 
-###（1）voliatile和synchonized有什么区别？
+### （1）voliatile和synchonized有什么区别？
 
 https://www.jianshu.com/p/0fc7ebb8d4f8
 
@@ -36,7 +36,7 @@ https://www.jianshu.com/p/0fc7ebb8d4f8
 
    当线程对voliatile变量写时，会把值刷新到主内存中。当线程对sychronized变量写时，会在变量解锁时把值刷新到主内存中。
 
-###（2）synchonized和jdk提供的Lock包有什么区别？
+### （2）synchonized和jdk提供的Lock包有什么区别？
 
 ​	synchronized是基于jvm底层实现的数据同步，lock是基于Java编写，主要通过硬件依赖CPU指令实现数据同步。与synchronized不同的是lock是纯java手写的，与底层的JVM无关。在java.util.concurrent.locks包中有很多Lock的实现类
 
@@ -70,7 +70,7 @@ https://www.jianshu.com/p/0fc7ebb8d4f8
 
 　　在性能上来说，如果竞争资源不激烈，两者的性能是差不多的，而当竞争资源非常激烈时（即有大量线程同时竞争），此时Lock的性能要远远优于synchronized。所以说，在具体使用时要根据适当情况选择。
 
-###（3）线程池
+### （3）线程池
 
 ​	为了防止线程频繁的创建撤销所带来的内存消耗。线程池中有一些核心线程永远不会被清理，当有一个任务需要执行时，首先判断线程池中的核心线程是否都在执行，如果没有，则创建一个工作线程执行任务，否则将任务放入等待队列，如果队列已满，则判断线程池（核心线程+非核心线程）是否已经满了，如果未满，则创建非核心线程执行该任务，如果满了就调用拒绝策略来管理任务。
 
@@ -78,7 +78,7 @@ https://blog.csdn.net/weixin_40271838/article/details/79998327
 
 ## 2.Java集合
 
-###（1）**HashMap**
+### （1）**HashMap**
 
 https://www.cnblogs.com/chengxiao/p/6059914.html
 
@@ -126,7 +126,7 @@ https://segmentfault.com/a/1190000012926722
 4.链表转化为红黑树:定位结点的hash算法简化会带来弊端,Hash冲突加剧,因此在链表节点数量大于8时，会将链表转化为红黑树进行存储。
 5.查询时间复杂度：从原来的遍历链表O(n)，变成遍历红黑树O(logN)。
 
-###（3）**HashMap和hashtable区别？**
+### （3）**HashMap和hashtable区别？**
 
  1、HashMap是非线程安全的，HashTable是线程安全的。 
  2、HashMap的键和值都允许有null值存在，而HashTable则不行。 
@@ -187,7 +187,7 @@ https://blog.csdn.net/qq_33326449/article/details/78946364
 
 共23种，分为三类：创建型（单例模式、工厂模式……）、结构型模式（代理模式、适配器模式……）、行为型模式（策略模式、观察者模式……）
 
-###**1.单例模式**
+### **1.单例模式**
 
 **简介：**
 
@@ -243,7 +243,7 @@ https://blog.csdn.net/qq_33326449/article/details/78946364
 
    
 
-###**2.工厂模式**
+### **2.工厂模式**
 
 **简介：**
 
@@ -337,7 +337,7 @@ public class FactoryPatternDemo {
 }
 ```
 
-###**3.代理模式**
+### **3.代理模式**
 
 **简介：**
 
@@ -420,7 +420,7 @@ public class FactoryPatternDemo {
    }
    ```
 
-###**4.适配器模式**
+### **4.适配器模式**
 
 **简介：**
 
@@ -478,7 +478,7 @@ Ps2转USB的适配器：我们想让Ps2接口的设备具备USB的功能，于�
 12 }
 ```
 
-###**5.策略模式**
+### **5.策略模式**
 
 **简介：**
 
