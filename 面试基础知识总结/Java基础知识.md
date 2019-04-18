@@ -177,6 +177,49 @@ Throwable又派生出Error类和Exception类。
 12 finalize()    //当垃圾回收器确定不存在对该对象的更多引用时，由对象的垃圾回收器调用此方法。
 ```
 
+## 6.包装类
+
+1.自动装箱、拆箱
+
+
+
+2.内部cach
+
+        Integer和Long类的内部都定义了一个cach用来存放-128到127之间的数，当我们赋值的数在这个区间时，使用的是方法区常量池中缓存数据，因此使用==比较时相等。范围之外的数就会新建一个对象，因此对象地址不同。
+        
+```java
+    Long a=128;
+    Long b=128;
+    System.out.println(a==b);//false
+    Long a=127;
+    Long b=127;
+    System.out.println(a==b);//true
+```
+
+源码解析：
+
+```java
+    private static class LongCache {
+            private LongCache(){}
+    
+            static final Long cache[] = new Long[-(-128) + 127 + 1];
+    
+            static {
+                for(int i = 0; i < cache.length; i++)
+                    cache[i] = new Long(i - 128);
+            }
+        }
+    public static Long valueOf(long l) {
+            final int offset = 128;
+            if (l >= -128 && l <= 127) { // will cache
+                return LongCache.cache[(int)l + offset];
+            }
+            return new Long(l);
+        }
+```
+
+
+
 ## 
 
 ## 设计模式
