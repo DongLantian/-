@@ -71,7 +71,22 @@ Spring AOP中的动态代理主要有两种方式，JDK动态代理和CGLIB动�
 
 ## （3）注解
 
+**1）**@Autowired 是我们使用得最多的注解，其实就是 autowire=byType 就是根据类型的自动注入依赖（基于注解的依赖注入），可以被使用再属性域，方法，构造函数上。
 
+**2）**@Qualifier 就是 autowire=byName, @Autowired注解判断多个bean类型相同时，就需要使用 @Qualifier("xxBean") 来指定依赖的bean的id：
+
+```
+@Controller
+@RequestMapping("/user")
+public class HelloController {
+    @Autowired
+    @Qualifier("userService")
+    private UserService userService;
+```
+
+**3）**@Resource ，用于属性域额和方法上。也是 byName 类型的依赖注入。使用方式：@Resource(name="xxBean"). 不带参数的 @Resource 默认值类名首字母小写。
+
+**4）**@Component， @Controller, @Service, @Repository, 这几个注解不同于上面的注解，上面的注解都是将被依赖的bean注入进入，而这几个注解的作用都是生产bean, 这些注解都是注解在类上，将类注解成spring的bean工厂中一个一个的bean。@Controller, @Service, @Repository基本就是语义更加细化的@Component。
 
 # 3.Mybatis
 
