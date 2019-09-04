@@ -1,3 +1,15 @@
+---
+title: ssm
+date: 2019-04-25 21:00:31
+tags: 
+- Java
+- Spring
+- SpringMVC
+- Mybatis
+categories:
+- 面试基础知识总结
+---
+
 # 1.Spring
 
 ## （1）AOP
@@ -23,7 +35,7 @@ Spring AOP中的动态代理主要有两种方式，JDK动态代理和CGLIB动�
 
 ## （2）IOC
 
-### * 控制反转和依赖注入
+###  控制反转和依赖注入
 
 　　在平时的java应用开发中，我们要实现某一个功能或者说是完成某个业务逻辑时至少需要两个或以上的对象来协作完成，在没有使用Spring的时候，每个对象在需要使用他的合作对象时，自己均要使用像new object() 这样的语法来将合作对象创建出来，这个合作对象是由自己主动创建出来的，创建合作对象的主动权在自己手上，自己需要哪个合作对象，就主动去创建，创建合作对象的主动权和创建时机是由自己把控的，而这样就会使得对象间的耦合度高了，A对象需要使用合作对象B来共同完成一件事，A要使用B，那么A就对B产生了依赖，也就是A和B之间存在一种耦合关系，并且是紧密耦合在一起，而使用了Spring之后就不一样了，创建合作对象B的工作是由Spring来做的，Spring创建好B对象，然后存储到一个容器里面，当A对象需要使用B对象时，Spring就从存放对象的那个容器里面取出A要使用的那个B对象，然后交给A对象使用，至于Spring是如何创建那个对象，以及什么时候创建好对象的，A对象不需要关心这些细节问题(你是什么时候生的，怎么生出来的我可不关心，能帮我干活就行)，A得到Spring给我们的对象之后，两个人一起协作完成要完成的工作即可。
 
@@ -31,7 +43,7 @@ Spring AOP中的动态代理主要有两种方式，JDK动态代理和CGLIB动�
 
 　　这是我对Spring的IoC**(控制反转)**的理解。DI**(依赖注入)**其实就是IOC的另外一种说法，DI是由Martin Fowler 在2004年初的一篇论文中首次提出的。他总结：**控制的什么被反转了？就是：获得依赖对象的方式反转了。**
 
-### * spring  bean生命周期
+###  spring  bean生命周期
 
 ![](images\spring bean生命周期.jpg)
 
@@ -71,32 +83,13 @@ Spring AOP中的动态代理主要有两种方式，JDK动态代理和CGLIB动�
 
 ## （3）注解
 
-**1）**@Autowired 是我们使用得最多的注解，其实就是 autowire=byType 就是根据类型的自动注入依赖（基于注解的依赖注入），可以被使用再属性域，方法，构造函数上。
 
-**2）**@Qualifier 就是 autowire=byName, @Autowired注解判断多个bean类型相同时，就需要使用 @Qualifier("xxBean") 来指定依赖的bean的id：
-
-```
-@Controller
-@RequestMapping("/user")
-public class HelloController {
-    @Autowired
-    @Qualifier("userService")
-    private UserService userService;
-```
-
-**3）**@Resource ，用于属性域额和方法上。也是 byName 类型的依赖注入。使用方式：@Resource(name="xxBean"). 不带参数的 @Resource 默认值类名首字母小写。
-
-**4）**@Component， @Controller, @Service, @Repository, 这几个注解不同于上面的注解，上面的注解都是将被依赖的bean注入进入，而这几个注解的作用都是生产bean, 这些注解都是注解在类上，将类注解成spring的bean工厂中一个一个的bean。@Controller, @Service, @Repository基本就是语义更加细化的@Component。
 
 # 3.Mybatis
 
-<https://blog.csdn.net/a745233700/article/details/80977133>
 
-## （1）缓存
 
-* 一级缓存: MyBatis一级缓存的作用域是同一个SqlSession，在同一个SqlSession中两次执行相同的sql语句，第一次执行后会将查询到的数据存储到缓存当中，第二次会从缓存中进行查找，从而提高查询效率，当一个SqlSession结束之后，一级缓存也将不存在，Mybatis默认开启一级缓存。
-* 二级缓存作用域为 Mapper(Namespace)，默认不打开二级缓存，要开启二级缓存，可在它的映射文件中配置<cache/> ；
-* 对于缓存数据更新机制，当某一个作用域(一级缓存 SqlSession/二级缓存Namespaces)的进行了C/U/D 操作后，默认该作用域下所有 select 中的缓存将被 clear。
+
 
 # 4.Tomcat加载机制
 

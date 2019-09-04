@@ -1,4 +1,12 @@
-
+---
+title: Java基础知识
+date: 2019-04-25 20:50:31
+tags: 
+- Java
+- 设计模式
+categories:
+- 面试基础知识总结
+---
 
 http://how2j.cn/k/j2se-interview/j2se-interview-java/624.html#
 
@@ -36,11 +44,11 @@ https://www.jianshu.com/p/0fc7ebb8d4f8
 
    当线程对voliatile变量写时，会把值刷新到主内存中。当线程对sychronized变量写时，会在变量解锁时把值刷新到主内存中。
 
-###（2）synchonized和jdk提供的Lock包有什么区别？
+### （2）synchonized和jdk提供的Lock包有什么区别？
 
 ​	synchronized是基于jvm底层实现的数据同步，lock是基于Java编写，主要通过硬件依赖CPU指令实现数据同步。与synchronized不同的是lock是纯java手写的，与底层的JVM无关。在java.util.concurrent.locks包中有很多Lock的实现类
 
-​	**1.synchronized**
+​		**1.synchronized**
 
 　　优点：实现简单，语义清晰，便于JVM堆栈跟踪，加锁解锁过程由JVM自动控制，提供了多种优化方案，使用更广泛
 
@@ -70,7 +78,7 @@ https://www.jianshu.com/p/0fc7ebb8d4f8
 
 　　在性能上来说，如果竞争资源不激烈，两者的性能是差不多的，而当竞争资源非常激烈时（即有大量线程同时竞争），此时Lock的性能要远远优于synchronized。所以说，在具体使用时要根据适当情况选择。
 
-###（3）线程池
+### （ 3）线程池
 
 ​	为了防止线程频繁的创建撤销所带来的内存消耗。线程池中有一些核心线程永远不会被清理，当有一个任务需要执行时，首先判断线程池中的核心线程是否都在执行，如果没有，则创建一个工作线程执行任务，否则将任务放入等待队列，如果队列已满，则判断线程池（核心线程+非核心线程）是否已经满了，如果未满，则创建非核心线程执行该任务，如果满了就调用拒绝策略来管理任务。
 
@@ -104,13 +112,13 @@ https://segmentfault.com/a/1190000012926722
 
      <https://zhuanlan.zhihu.com/p/21673805>
 
-**HashMap多线程并发问题**：
+**多线程并发问题**：
 
-1. 如果多个线程同时使用put方法添加元素，而且假设正好存在两个 put 的 key 发生了碰撞(根据 hash 值计算的 bucket 一样)，那么根据 HashMap 的实现，这两个 key 会添加到数组的同一个位置，这样最终就会发生其中一个线程的 put 的数据被覆盖。
+1. 现在假如A线程和B线程同时对同一个数组位置调用addEntry，两个线程会同时得到现在的头结点，然后A写入新的头结点之后，B也写入新的头结点，那B的写入操作就会覆盖A的写入操作造成A的写入操作丢失。
 
-2. 如果多个线程同时检测到元素个数超过数组大小* loadFactor ，这样就会发生多个线程同时对 Node 数组进行扩容，都在重新计算元素位置以及复制数据，但是最终只有一个线程扩容后的数组会赋给 table，也就是说其他线程的都会丢失，并且各自线程 put 的数据也丢失。
+2. 当多个线程同时操作同一个数组位置的时候，也都会先取得现在状态下该位置存储的头结点，然后各自去进行计算操作，之后再把结果写会到该数组位置去，其实写回的时候可能其他的线程已经就把这个位置给修改过了，就会覆盖其他线程的修改。
 
-3. HashMap 在并发执行 put 操作时会引起死循环，导致 CPU 利用率接近100%。因为多线程会导致 HashMap 的 Node 链表形成环形数据结构，一旦形成环形数据结构，Node 的 next 节点永远不为空，就会在获取 Node 时产生死循环。
+3. 当多个线程同时检测到总数量超过门限值的时候就会同时调用resize操作，各自生成新的数组并rehash后赋给该map底层的数组table，结果最终只有最后一个线程生成的新数组被赋给table变量，其他线程的均会丢失。而且当某些线程已经完成赋值而其他线程刚开始的时候，就会用已经被赋值的table作为原始数组，这样也会有问题。
 
    多线程扩容时出现的问题：<https://blog.csdn.net/chisunhuang/article/details/79041656>
 
@@ -282,7 +290,25 @@ https://blog.csdn.net/qq_33326449/article/details/78946364
      }  
    ```
 
+   ​	上述加锁方式仍然不能保证安全。首先，由于指令会重排序，instance变量有可能再未被初始化的情况下被返回，造成空指针异常；其次，第一次null判断后线程阻塞，另一个线程创建实例后第一个线程再次创建实例造成多个实例被创建，因此，又有了双重校验锁模式。
    
+   ```java
+   public class Singleton {
+       private static volatile Singleton instance;  //volatile防止指令重排序造成空指针异常
+       private Singleton (){}
+       //双重校验锁：防止在#语句处线程阻塞造成多个实例被创建
+       public static Singleton getInstance(){
+           if (instance == null){              //#
+               synchronized (Singleton.class) {
+                   if (instance == null) {
+                       instance = new Singleton();
+                   }
+               }
+           }
+           return instance;
+       }
+   }
+   ```
 
 ### **2.工厂模式**
 

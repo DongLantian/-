@@ -1,4 +1,17 @@
-##**一、 什么是webservice**
+---
+title: WebService
+date: 2019-04-25 21:03:31
+tags: 
+- SOA
+- Webservice
+categories:
+- 面试基础知识总结
+
+---
+
+
+
+## 一、 什么是webservice**
 
 **(用你的话描述webservice)?在什么时候用webservice（webservice能给我们解决什么样的问题）？**
 
@@ -10,7 +23,7 @@
 
 其实可以从多个角度来理解WebService，从表面上看，WebService就是一个应用程序向外界暴露出一个能通过Web进行调用的API，也就是说能用编程的方法通过Web来调用这个应用程序。我们把调用这个WebService的应用程序叫做客户端，而把提供这个WebService的应用程序叫做服务端。从深层次看，WebService是建立可互操作的分布式应用程序的新平台，是一个平台，是一套标准。它定义了应用程序如何在Web上实现互操作性，你可以用任何你喜欢的语言，在任何你喜欢的平台上写Web service ，只要我们可以通过Web service标准对这些服务进行查询和访问。
 
-##**二、WSDL是什么，有什么作用？**
+## **二、WSDL是什么，有什么作用？**
 
 WSDL是web service definition language的缩写，即web service的定义（描述）语言。
 
@@ -18,7 +31,7 @@ WSDL是web service definition language的缩写，即web service的定义（描�
 
 Webservice服务发布之后，通过浏览器访问发布的+?wsdl即可获得wsdl文档。
 
-##**三、WSDL文档主要有那几部分组成，分别有什么作用？**
+## **三、WSDL文档主要有那几部分组成，分别有什么作用？**
 
 一个WSDL文档的根元素是definitions元素，WSDL文档包含7个重要的元素：types, import, message, portType, operations, binding和service元素。
 
@@ -41,7 +54,7 @@ Webservice服务发布之后，通过浏览器访问发布的+?wsdl即可获得w
 每一个Port元素对应一个不同的Web服务，port将一个URL赋予一个特定的binding，通过location实现。
 可以使两个或者多个port元素将不同的URL赋给相同的binding。
 
-##**四、SOAP是什么？**
+## **四、SOAP是什么？**
 
   SOAP是simple object access protocal的缩写，即简单对象访问协议。 是基于XML和HTTP的一种通信协议。是webservice所使用的一种传输协议，webservice之所以能够做到跨语言和跨平台，主要是因为XML和HTTP都是独立于语言和平台的。Soap的消息分为请求消息和响应消息，一条SOAP消息就是一个普通的XML文档，包含下列元素：
 
@@ -61,17 +74,17 @@ Soap响应消息
 
  
 
-##**五、怎么理解UDDI？**
+## **五、怎么理解UDDI？**
 
 UDDI是Universal Description Discovery and Integration的缩写，即统一描述、发现和整合规范。用来注册和查找服务，把web services收集和存储起来，这样当别人访问这些信息的时候就从UDDI中查找，看有没有这个信息存在。
 
-##**六、Webservice的SEI指什么？**
+## **六、Webservice的SEI指什么？**
 
 WebService EndPoint Interface（webservice终端[Server端]接口）
 
 就是 WebService服务器端用来处理请求的接口
 
-##**七、说说你知道的webservice框架，他们都有什么特点？**
+## **七、说说你知道的webservice框架，他们都有什么特点？**
 
 Webservice常用框架有JWS、Axis2、XFire以及CXF。
 
@@ -88,7 +101,7 @@ Webservice常用框架有JWS、Axis2、XFire以及CXF。
 2、如果应用程序是遵循 [spring](http://lib.csdn.net/base/17)哲学路线的话，Apache CXF是一种更好的选择，特别对嵌入式的Web Services来说；
 3、如果应用程序没有新的特性需要的话，就仍是用原来项目所用的框架，比如 Axis1，XFire，Celtrix或BEA等等厂家自己的Web Services实现，就别[劳民伤财](https://www.baidu.com/s?wd=%E5%8A%B3%E6%B0%91%E4%BC%A4%E8%B4%A2&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd)了。
 
-##**八、你的系统中是否有使用到webservice开发，具体是怎么实现的？**
+## **八、你的系统中是否有使用到webservice开发，具体是怎么实现的？**
 
 如果你觉得自己掌握的不够好，对自己不够自信的可以回答为“我的系统中没有使用到webservice的开发，但是我掌握webservice开发的概念和流程”，然后可以给他讲讲相关的概念，也就是上面的这些问题的回答，这样可以绕过这个问题，因为并不是所有的系统都会涉及到webservice的开发。
 
